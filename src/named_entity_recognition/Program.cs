@@ -2,7 +2,7 @@
 using Microsoft.ML.Runtime;
 using Microsoft.ML.TorchSharp;
 using Microsoft.ML.Transforms.Text;
-using sample.Models;
+using named_entity_recognition.Models;
 using TorchSharp;
 
 const int BatchSize = 32;

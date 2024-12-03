@@ -1,4 +1,4 @@
-﻿namespace sample.Models;
+﻿namespace named_entity_recognition.Models;
 
 internal class Label
 {
