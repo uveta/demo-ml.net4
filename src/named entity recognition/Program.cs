@@ -3,7 +3,6 @@ using Microsoft.ML.Runtime;
 using Microsoft.ML.TorchSharp;
 using Microsoft.ML.Transforms.Text;
 using named_entity_recognition.Models;
-using TorchSharp;
 
 const int BatchSize = 32;
 const int MaxEpochs = 2;
@@ -21,18 +20,6 @@ try
         if (!allowedLevels.Contains(e.Kind)) return;
         Console.WriteLine($"[{e.Kind:G}] {e.Message}");
     };
-    // Check for available GPU devices
-    int gpuDevices = torch.cuda.device_count();
-    if (gpuDevices > 0)
-    {
-        // Select the first GPU device
-        context.GpuDeviceId = 0;
-    }
-    else
-    {
-        Console.WriteLine("No GPU devices found. Falling back to CPU.");
-        context.FallbackToCpu = true;
-    }
 
     // train
     var labels = context.Data.LoadFromEnumerable(
