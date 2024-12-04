@@ -14,7 +14,7 @@ try
         /*ChannelMessageKind.Trace,*/
         ChannelMessageKind.Info, ChannelMessageKind.Warning, ChannelMessageKind.Error
     };
-    var context = new MLContext { FallbackToCpu = false };
+    var context = new MLContext();
     context.Log += (_, e) =>
     {
         if (!allowedLevels.Contains(e.Kind)) return;
@@ -28,7 +28,7 @@ try
         new Label { Key = "CITY" },
         new Label { Key = "COUNTRY" }
     ]);
-    var trainingData = context.Data.LoadFromEnumerable(GetMockData());
+    var trainingData = context.Data.LoadFromEnumerable(GetData());
     var estimator = context.Transforms.Text.NormalizeText(
             inputColumnName: "Sentence",
             outputColumnName: "Sentence",
@@ -70,7 +70,7 @@ catch (Exception ex)
 }
 return;
 
-static List<ModelInput> GetMockData()
+static List<ModelInput> GetData()
 {
     var trainingData = new List<ModelInput>();
     for (var i = 0; i < 1500; i++)
